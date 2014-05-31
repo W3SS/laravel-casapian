@@ -1,0 +1,20 @@
+{% extends 'fields.field' %}
+{% block controls %}
+
+	{% set settings = {'class':'span5 select-multi', 'data-placeholder':'select a ' ~ field.label | lower } %}
+
+	{% if field.isMultiple or field.isHasMany %}
+		{% set settings = settings|merge({'multiple': 'true'}) %}
+	{% endif %}
+
+	{% if field.add and not Request_ajax() %}
+	<div class="input-append">
+	{% endif %}
+    {{ Form_select( field.getName, field.getOptions , field.getSelected , settings ) }}
+
+    {% if field.add and not Request_ajax() %}
+    {{ admin }}
+    <a class="btn btn-modal" data-key="{{ field.key }}" data-field="{{ field.fieldname }}" href="{{ URL_route("admin_create", [ field.relatedAdmin ]) }}"><i class="icon icon-plus"></i></a>
+	</div>
+    {% endif %}
+{% endblock %}

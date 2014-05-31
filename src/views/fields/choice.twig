@@ -1,0 +1,8 @@
+{% extends 'fields.field' %}
+{% block controls %}
+
+    {% set settings = {'class':'span5 select-multi', 'data-placeholder':'select a ' ~ field.label | lower } %}
+
+    {{ Form_select( field.name, field.getChoices , field.getValue , settings ) }}
+
+{% endblock %}

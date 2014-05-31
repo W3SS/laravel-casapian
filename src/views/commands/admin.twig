@@ -1,0 +1,41 @@
+<?php 
+
+return array(
+	'title' => '{{ title }}',
+
+	'single' => '{{ single }}',
+
+	'model' => '{{ model }}',
+
+	/**
+	 * The display columns
+	 */
+    'columns' => array(
+    {% for ckey, column in columns %}
+        "{{ ckey }}" => array(
+        {% for key, field in column %}
+            "{{ key }}" => "{{ field }}",
+        {% endfor %}
+        ),
+    {% endfor %}
+    ),
+    'filters' => array(
+    {% for ckey, filter in filters %}
+        "{{ ckey }}" => array(
+        {% for key, field in filter %}
+            "{{ key }}" => "{{ field }}",
+        {% endfor %}
+        ),
+    {% endfor %}
+    ),
+    'edit_fields' => array(
+    {% for ckey, edit_field in edit_fields %}
+        "{{ ckey }}" => array(
+        {% for key, field in edit_field %}
+            "{{ key }}" => "{{ field }}",
+        {% endfor %}
+        ),
+	{% endfor %}
+    ),
+    'form_width' => 600
+);

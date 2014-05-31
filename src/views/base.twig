@@ -1,0 +1,94 @@
+{% if not Request_ajax() %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="stylesheet" href="/packages/samuel-joos/casapian/bootstrap/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="/packages/samuel-joos/casapian/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/packages/samuel-joos/casapian/bootstrap/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="/packages/samuel-joos/casapian/select2/select2.css">
+        <link rel="stylesheet" href="/packages/samuel-joos/casapian/select2/select2-bootstrap.css">
+        <link rel="stylesheet" href="/packages/samuel-joos/casapian/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/packages/samuel-joos/casapian/tablesorter/css/theme.bootstrap.css">
+        <link rel="stylesheet" href="/packages/samuel-joos/casapian/casapian/main.css">
+        <script src="/packages/samuel-joos/casapian/casapian/js/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a href="/" class="brand">Trovi</a>
+
+                    <ul class="nav">
+                    {% for  key,item in config_get('casapian::casapian.menu') %}
+                        {% if item is iterable %}
+                            <li class="dropdown">
+                                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    {{ key }}
+                                    <span class="caret"></span>
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    {% for key,val in item %}
+                                    <li><a href="{{ URL_route('admin_overview', [ val ]) }}">{{ key }}</a></li>
+                                    {% endfor %}
+                                  </ul>
+                            </li>
+                        {% else %}
+                            <li><a href="{{ URL_route('admin_overview', [ item ]) }}">{{ key }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+
+                    <div class="pull-right">
+                        {% block navright %}
+
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+{% endif %}
+            {% block content %}
+
+            {% endblock %}
+
+{% if not Request_ajax() %}
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/packages/samuel-joos/casapian/casapian/js/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="/packages/samuel-joos/casapian/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/packages/samuel-joos/casapian/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript" src="/packages/samuel-joos/casapian/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+        <script src="/packages/samuel-joos/casapian/select2/select2.js"></script>
+        <script src="/packages/samuel-joos/casapian/jquery.form.min.js"></script>
+        <script src="/packages/samuel-joos/casapian/casapian/js/main.js"></script>
+        <script src="/packages/samuel-joos/casapian/tablesorter/js/jquery.tablesorter.js"></script>
+        <script src="/packages/samuel-joos/casapian/tablesorter/addons/pager/jquery.tablesorter.pager.min.js"></script>
+        <script src="/packages/samuel-joos/casapian/tablesorter/js/jquery.tablesorter.widgets.js"></script>
+        <script src="/packages/samuel-joos/casapian/bootbox.min.js"></script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
+{% endif %}

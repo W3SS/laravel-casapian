@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+	{{ Form_model(data,{'route':['admin_save', admin ], 'class':'form-horizontal'}) }}
+	<fieldset>
+	<legend>Edit {{ single }}</legend>
+	{% for field in fields %}
+	    {{ field.getTemplate }}
+	{% endfor %}
+	{{ Form_hidden(key,field.getKey) }}
+	<div class="form-actions">
+		{{ Form_submit('Save', {'class':'btn btn-primary'}) }}
+		{{ Form_submit('Save and next', {'name':'save_next','class':'btn'}) }}
+		{{ Form_submit('Delete', {'name':'delete','class':'btn btn-danger pull-right'}) }}
+	</div>
+	</fieldset>
+	{{ Form_close() }}
+{% endblock %}

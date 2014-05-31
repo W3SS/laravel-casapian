@@ -1,0 +1,16 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+	{{ Form_open({'route':['admin_save', admin ], 'class':'form-horizontal'}) }}
+	<fieldset>
+	<legend>New {{ single }}</legend>
+	{% for field in fields %}
+	    {{ field.getTemplate }}
+	{% endfor %}
+	<div class="form-actions">
+		{{ Form_submit('Save', {'class':'btn btn-primary'}) }}
+		{{ Form_submit('Save and next', {'name':'save_next','class':'btn'}) }}
+	</div>
+	</fieldset>
+	{{ Form_close() }}
+{% endblock %}
